@@ -191,6 +191,13 @@ function createDicomWebApi(dicomWebConfig: DicomWebConfig, servicesManager) {
         }
       };
 
+      const withCredentialsRequestHooks = [
+        (request, _metadata) => {
+          request.withCredentials = true;
+          return request;
+        },
+      ];
+
       qidoConfig = {
         url: dicomWebConfig.qidoRoot,
         staticWado: dicomWebConfig.staticWado,
@@ -198,6 +205,7 @@ function createDicomWebApi(dicomWebConfig: DicomWebConfig, servicesManager) {
         headers: userAuthenticationService.getAuthorizationHeader(),
         errorInterceptor: errorHandler.getHTTPErrorHandler(),
         supportsFuzzyMatching: dicomWebConfig.supportsFuzzyMatching,
+        requestHooks: withCredentialsRequestHooks,
       };
 
       wadoConfig = {
@@ -207,6 +215,7 @@ function createDicomWebApi(dicomWebConfig: DicomWebConfig, servicesManager) {
         headers: userAuthenticationService.getAuthorizationHeader(),
         errorInterceptor: errorHandler.getHTTPErrorHandler(),
         supportsFuzzyMatching: dicomWebConfig.supportsFuzzyMatching,
+        requestHooks: withCredentialsRequestHooks,
       };
 
       // TODO -> Two clients sucks, but its better than 1000.
