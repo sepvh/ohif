@@ -254,6 +254,7 @@ async function fetchThumbnailObjectURL(
     const response = await fetch(fetchRequest.url, {
       method: 'GET',
       headers: fetchRequest.headers,
+      credentials: 'include',
       signal,
     });
 

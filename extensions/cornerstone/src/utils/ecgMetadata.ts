@@ -101,7 +101,10 @@ export function buildEcgModule(
         Object.assign(headers, authHeader);
       }
 
-      const response = await fetch(waveformData.BulkDataURI, { headers });
+      const response = await fetch(waveformData.BulkDataURI, {
+        headers,
+        credentials: 'include',
+      });
       if (!response.ok) {
         throw new Error(
           `[ECGViewport] Failed to fetch waveform BulkDataURI: ${response.status}`
