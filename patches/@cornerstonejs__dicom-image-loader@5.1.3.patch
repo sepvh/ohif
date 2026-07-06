@@ -1,0 +1,24 @@
+diff --git a/dist/esm/imageLoader/internal/rangeRequest.js b/dist/esm/imageLoader/internal/rangeRequest.js
+index 07fee85e4162e6541440317ec3e159130e09a88a..bd450b787c06053bf04d436d7f1672af5e1415ed 100644
+--- a/dist/esm/imageLoader/internal/rangeRequest.js
++++ b/dist/esm/imageLoader/internal/rangeRequest.js
+@@ -66,6 +66,7 @@ async function fetchRangeAndAppend(url, headers, range, streamingData) {
+     }
+     const response = await fetch(url, {
+         headers,
++        credentials: 'include',
+         signal: undefined,
+     });
+     const responseArrayBuffer = await response.arrayBuffer();
+diff --git a/dist/esm/imageLoader/internal/streamRequest.js b/dist/esm/imageLoader/internal/streamRequest.js
+index 5033013a31070156a417c0ee19b1e62a273556a2..028da98942864484c4a02b2e6e588f5fbf81b529 100644
+--- a/dist/esm/imageLoader/internal/streamRequest.js
++++ b/dist/esm/imageLoader/internal/streamRequest.js
+@@ -28,6 +28,7 @@ export default function streamRequest(url, imageId, defaultHeaders = {}, options
+         try {
+             const response = await fetch(url, {
+                 headers,
++                credentials: 'include',
+                 signal: undefined,
+             });
+             if (response.status !== 200) {
